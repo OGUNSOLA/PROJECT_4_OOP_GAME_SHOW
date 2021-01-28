@@ -29,13 +29,13 @@ keys.forEach(key =>{
 
 
 keys.forEach(key =>{
-    key.addEventListener('keypress', function(){
+    key.addEventListener('keyup', function(){
          alert('aha');
     });
   
 });
 
-keysDiv.addEventListener('keypress', (e)=> {
+keysDiv.addEventListener('keyup', (e)=> {
     if(e.target = 'button'){
         console.log(e.target);
     }
