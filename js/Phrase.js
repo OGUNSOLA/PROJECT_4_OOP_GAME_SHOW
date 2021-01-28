@@ -18,27 +18,33 @@
 			}
 			else {
 				phraseLi.classList.add('letter');
-				phraseLi.classList.add(letter);
-				phraseLi.classList.add(letter);
-				phraseLi.classList.add(letter);
 				phraseLi.innerHTML = letter
 			}
 			phraseUL.appendChild(phraseLi);
 		 }
  		
 	 }
-	 
-	 checkLetter(e){
 
-		 
-		 for(let i=0; i< game.activePhrase.phrase.length; i++){
-			 
-			 if(game.activePhrase.phrase[i] == e.target.innerHTML){
-				foundIndices.push[i];
-				console.log(`${e.target.innerHTML} at ${i}`);
-			 }
-		 }
-		 console.log(foundIndices);
-		 
+	 
+	 checkLetter(key){
+		return this.phrase.includes(key);
+	 
 	 }
+
+	 showMatchedLetter(key){
+		const letters = document.querySelectorAll('.letter');
+
+		for(const letter of letters)
+		{
+			if(letter.innerText === key){
+				letter.classList.remove('hide');
+				letter.classList.add('show');
+			}	
+		}
+		
+	 }	
+
+	
  }
+
+ 

@@ -8,8 +8,10 @@
 
 const start = document.getElementById('btn__reset');
 let game;
-const keys = document.getElementById('qwerty');
-const foundIndices =[];
+const keysDiv = document.getElementById('qwerty');
+const keys = document.querySelectorAll('.key')
+const letters = document.querySelectorAll('.letter');
+
 
 start.addEventListener("click", function() {
 //game.getRandomPhrase().addPhraseToDisplay();
@@ -17,6 +19,24 @@ game = new Game();
 game.startGame();
 });
 
-keys.addEventListener('click', function (e){
-    game.handleInteraction(e);
+keys.forEach(key =>{
+    key.addEventListener('click', function(){
+         game.handleInteraction(key);
+    });
+  
+});
+
+
+
+keys.forEach(key =>{
+    key.addEventListener('keypress', function(){
+         alert('aha');
+    });
+  
+});
+
+keysDiv.addEventListener('keypress', (e)=> {
+    if(e.target = 'button'){
+        console.log(e.target);
+    }
 });
