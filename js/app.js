@@ -21,12 +21,13 @@ start.animate([{
 }
 ],1000);
 
+// start the game 
 start.addEventListener("click", function() {
-//game.getRandomPhrase().addPhraseToDisplay();
 game = new Game();
 game.startGame();
 });
 
+// clicking onscreen keyboard selects a key
 keys.forEach(key =>{
     key.addEventListener('click', function(){
          game.handleInteraction(key);
@@ -34,10 +35,7 @@ keys.forEach(key =>{
   
 });
 
-
-
-
-
+// pressing the computer physical keyboard selects a key
 addEventListener('keyup', (e)=> {
     for(const key of keys) {
        if(e.key === key.textContent){

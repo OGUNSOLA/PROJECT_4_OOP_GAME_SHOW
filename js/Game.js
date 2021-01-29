@@ -2,6 +2,7 @@
  * Project 4 - OOP Game App
  * Game.js */
 
+ // the game class is created here 
  class Game {
 
  	constructor (){
@@ -21,11 +22,13 @@
 		 
  	}
 
+	 // uses math.random to generate a number and selects a phrase wit the index
  	getRandomPhrase(){
  		let index = Math.floor(Math.random() * this.phrase.length);
  		return this.phrase[index];
 	 }
-	 
+	
+	 // initialises the game 
 	 startGame(){
 		 this.resetGame();
 		 document.getElementById('overlay').style.display ='none';
@@ -34,8 +37,9 @@
 	  
 	 }
 
+	 // handles the function relating to chosing a key
 	 handleInteraction(key){
-		 key.disabled = true;
+		 key.disabled = true;  
 		if(this.activePhrase.checkLetter(key.textContent) === true){
 			this.activePhrase.showMatchedLetter(key.textContent);
 			key.classList.add('chosen');
@@ -48,6 +52,8 @@
 		],1000);
 			
 		}
+
+		// removes a life is wrong key  is selected 
 		if(this.activePhrase.checkLetter(key.textContent) !== true){
 			this.removeLife();
 			key.classList.add('wrong');
@@ -57,6 +63,8 @@
 		
 	 }
 
+
+	 // continuouls checks if all the letters in the phrase have been revealed 
 	 checkForWin(){
 		let letters = document.querySelectorAll('.letter'); // get all the letters 		
 		
@@ -75,16 +83,16 @@
 	],1000);
 	 }
 
+	 // removes a life when wrong key is selected 
 	 removeLife(){
 		const hearts = document.querySelectorAll('.tries img');
 		hearts[this.missed].src= 'images/lostHeart.png';
 		this.missed ++;
 		this.gameOver();
 
-		
-
 	 }
 
+	 // Handles display for game over( win or lose)
 	 gameOver(value = false){
 		
 		 let message = document.getElementById('game-over-message');
@@ -104,6 +112,7 @@
 			
 		}
 
+		// animates the start button 
 		start.animate([{
 			fontSize: '20px'
 		},
@@ -112,7 +121,9 @@
 		}
 	],1000);
 	 }
-	  
+	 
+	 
+	 // reets the game , addd classes removed and imaves set back to default, the padded phrase removed 
 	 resetGame(){
 		for(const key of keys){
 			key.classList.remove('wrong');
