@@ -13,6 +13,14 @@ const keys = document.querySelectorAll('.key')
 const letters = document.querySelectorAll('.letter');
 
 
+start.animate([{
+    fontSize: '20px'
+},
+{
+    fontSize: '25px'
+}
+],1000);
+
 start.addEventListener("click", function() {
 //game.getRandomPhrase().addPhraseToDisplay();
 game = new Game();
@@ -28,15 +36,12 @@ keys.forEach(key =>{
 
 
 
-keys.forEach(key =>{
-    key.addEventListener('keyup', function(){
-         alert('aha');
-    });
-  
-});
 
-keysDiv.addEventListener('keyup', (e)=> {
-    if(e.target = 'button'){
-        console.log(e.target);
+
+addEventListener('keyup', (e)=> {
+    for(const key of keys) {
+       if(e.key === key.textContent){
+        game.handleInteraction(key);
+       }
     }
 });

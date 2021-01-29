@@ -39,6 +39,13 @@
 		if(this.activePhrase.checkLetter(key.textContent) === true){
 			this.activePhrase.showMatchedLetter(key.textContent);
 			key.classList.add('chosen');
+			key.animate([{
+				color:'#FFFFFF'
+			},
+			{
+				color:'black'
+			}
+		],1000);
 			
 		}
 		if(this.activePhrase.checkLetter(key.textContent) !== true){
@@ -58,7 +65,14 @@
 		if(every.length ===  letters.length){
 			this.gameOver(true);
 		}
-			// if the letters length is equal to length of array with show class, then all elements have been revealed
+
+		start.animate([{
+			fontSize: '20px'
+		},
+		{
+			fontSize: '22px'
+		}
+	],1000);
 	 }
 
 	 removeLife(){
@@ -66,6 +80,9 @@
 		hearts[this.missed].src= 'images/lostHeart.png';
 		this.missed ++;
 		this.gameOver();
+
+		
+
 	 }
 
 	 gameOver(value = false){
@@ -86,6 +103,14 @@
 			
 			
 		}
+
+		start.animate([{
+			fontSize: '20px'
+		},
+		{
+			fontSize: '22px'
+		}
+	],1000);
 	 }
 	  
 	 resetGame(){
