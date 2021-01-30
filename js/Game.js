@@ -33,24 +33,24 @@
 		 this.resetGame();
 		 document.getElementById('overlay').style.display ='none';
 		 this.activePhrase = this.getRandomPhrase();
-		 this.activePhrase.addPhraseToDisplay();
-	  
+		 this.activePhrase.addPhraseToDisplay();	  
 	 }
 
 	 // handles the function relating to chosing a key
 	 handleInteraction(key){
+		 console.log(this.checkForWin());
 		 key.disabled = true;  
 		if(this.activePhrase.checkLetter(key.textContent) === true){
+			//this.checkForWin();
 			this.activePhrase.showMatchedLetter(key.textContent);
 			key.classList.add('chosen');
 			key.animate([{
 				color:'#FFFFFF'
-			},
-			{
-				color:'black'
-			}
-		],1000);
-			
+				},
+				{
+					color:'black'
+				}
+			],1000);			
 		}
 
 		// removes a life is wrong key  is selected 
@@ -59,36 +59,39 @@
 			key.classList.add('wrong');
 		}
 		
-		this.checkForWin();
-		
-	 }
+		if(this.checkForWin()){
+			this.gameOver(true);
+			start.animate([{
+						fontSize: '20px'
+					},
+					{
+						fontSize: '22px'
+					}
+				],1000);
+			}
+
+			if(this.missed === 5){
+				this.gameOver();
+			}
+	 	}
 
 
 	 // continuouls checks if all the letters in the phrase have been revealed 
 	 checkForWin(){
+		 
 		let letters = document.querySelectorAll('.letter'); // get all the letters 		
-		
 		let every = Array.from(letters).filter(letter => letter.classList.contains('show')); // check if every element in the array has a class 'show'
 		// if the letters length is equal to length of array with show class, then all elements have been revealed
-		if(every.length ===  letters.length){
-			this.gameOver(true);
-		}
-
-		start.animate([{
-			fontSize: '20px'
-		},
-		{
-			fontSize: '22px'
-		}
-	],1000);
-	 }
+		return letters.length === every.length
+		
+	 	}
 
 	 // removes a life when wrong key is selected 
 	 removeLife(){
 		const hearts = document.querySelectorAll('.tries img');
 		hearts[this.missed].src= 'images/lostHeart.png';
 		this.missed ++;
-		this.gameOver();
+		//this.gameOver();
 
 	 }
 
@@ -96,31 +99,32 @@
 	 gameOver(value = false){
 		
 		 let message = document.getElementById('game-over-message');
-		if(this.missed === 5){
-			message.textContent = "Sorry, you lose, better luck next time";
-			document.getElementById('overlay').style.display ='block';
-			document.getElementById('overlay').style.backgroundColor = 'red';
-			
-			
-			
-		}
+		// if(this.missed === 5){
+		// 	message.textContent = "Sorry, you lose, better luck next time";
+		// 	document.getElementById('overlay').style.display ='block';
+		// 	document.getElementById('overlay').style.backgroundColor = 'red';			
+		// }
+
 		if(value === true){
 			message.textContent = " You win, way to go";
 			document.getElementById('overlay').style.display ='block';
-			document.getElementById('overlay').style.backgroundColor = 'green';
-			
-			
+			document.getElementById('overlay').style.backgroundColor = 'green';			
+		}
+		else {
+			message.textContent = "Sorry, you lose, better luck next time";
+			document.getElementById('overlay').style.display ='block';
+			document.getElementById('overlay').style.backgroundColor = 'red';
 		}
 
 		// animates the start button 
 		start.animate([{
 			fontSize: '20px'
-		},
-		{
-			fontSize: '22px'
-		}
-	],1000);
-	 }
+			},
+			{
+				fontSize: '22px'
+			}
+			],1000);
+	 	}
 	 
 	 
 	 // reets the game , addd classes removed and imaves set back to default, the padded phrase removed 

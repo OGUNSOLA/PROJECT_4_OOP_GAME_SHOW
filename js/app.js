@@ -38,7 +38,7 @@ keys.forEach(key =>{
 // pressing the computer physical keyboard selects a key
 addEventListener('keyup', (e)=> {
     for(const key of keys) {
-       if(e.key === key.textContent){
+       if(e.key === key.textContent && key.disabled ===false){
         game.handleInteraction(key);
        }
     }
