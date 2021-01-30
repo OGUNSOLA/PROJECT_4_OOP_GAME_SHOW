@@ -41,7 +41,7 @@
 		 console.log(this.checkForWin());
 		 key.disabled = true;  
 		if(this.activePhrase.checkLetter(key.textContent) === true){
-			//this.checkForWin();
+			this.checkForWin();
 			this.activePhrase.showMatchedLetter(key.textContent);
 			key.classList.add('chosen');
 			key.animate([{
@@ -99,11 +99,7 @@
 	 gameOver(value = false){
 		
 		 let message = document.getElementById('game-over-message');
-		// if(this.missed === 5){
-		// 	message.textContent = "Sorry, you lose, better luck next time";
-		// 	document.getElementById('overlay').style.display ='block';
-		// 	document.getElementById('overlay').style.backgroundColor = 'red';			
-		// }
+	
 
 		if(value === true){
 			message.textContent = " You win, way to go";
