@@ -38,10 +38,11 @@
 
 	 // handles the function relating to chosing a key
 	 handleInteraction(key){
-		 console.log(this.checkForWin());
+	
 		 key.disabled = true;  
 		if(this.activePhrase.checkLetter(key.textContent) === true){
-			this.checkForWin();
+			//this.checkForWin();
+			
 			this.activePhrase.showMatchedLetter(key.textContent);
 			key.classList.add('chosen');
 			key.animate([{
@@ -50,7 +51,17 @@
 				{
 					color:'black'
 				}
-			],1000);			
+			],1000);
+			if(this.checkForWin()){
+				this.gameOver(true);
+				start.animate([{
+							fontSize: '20px'
+						},
+						{
+							fontSize: '22px'
+						}
+					],1000);
+				}			
 		}
 
 		// removes a life is wrong key  is selected 
@@ -58,17 +69,6 @@
 			this.removeLife();
 			key.classList.add('wrong');
 		}
-		
-		if(this.checkForWin()){
-			this.gameOver(true);
-			start.animate([{
-						fontSize: '20px'
-					},
-					{
-						fontSize: '22px'
-					}
-				],1000);
-			}
 
 			if(this.missed === 5){
 				this.gameOver();
@@ -78,7 +78,7 @@
 
 	 // continuouls checks if all the letters in the phrase have been revealed 
 	 checkForWin(){
-		 
+		 console.log('a');
 		let letters = document.querySelectorAll('.letter'); // get all the letters 		
 		let every = Array.from(letters).filter(letter => letter.classList.contains('show')); // check if every element in the array has a class 'show'
 		// if the letters length is equal to length of array with show class, then all elements have been revealed
@@ -91,7 +91,6 @@
 		const hearts = document.querySelectorAll('.tries img');
 		hearts[this.missed].src= 'images/lostHeart.png';
 		this.missed ++;
-		//this.gameOver();
 
 	 }
 
